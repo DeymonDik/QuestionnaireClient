@@ -1,0 +1,12 @@
+<div class="quiz-box" id="quiz">
+    <div class="quiz-header">
+        <ul>
+            @for(question of questionsis; track question){
+                <li>
+                    {{question.question}}
+                </li>
+            }
+            <button (click)="getDa()">{{questionsis[0]}}</button>
+        </ul>
+    </div>
+</div>        

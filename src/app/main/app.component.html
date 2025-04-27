@@ -1,0 +1,32 @@
+<div>
+    <nav>
+        <ul class="quiz-box">
+            <li>
+                <a routerLink="" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">Главная</a>
+            </li>
+            <li>
+                <a routerLink="/answerer" routerLinkActive="active">Пользователь</a>
+            </li>
+            <li>
+                <a routerLink="/start" routerLinkActive="active">Начать</a>
+            </li>
+            <li>
+                <a routerLink="/questions" routerLinkActive="active">Вопросы</a>
+            </li>
+            <li>
+                <a routerLink="/create" routerLinkActive="active">Создать</a>
+            </li>
+        </ul>
+    </nav>
+    @if (enabled) {
+        <router-outlet/>
+    } @else {
+    <div class="quiz-box">
+        <div class="quiz-header">
+            <h2>Опросник</h2>
+        </div>
+        <button (click)="goStart()">Начать</button>
+    </div>
+    }
+</div>

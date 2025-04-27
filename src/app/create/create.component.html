@@ -1,0 +1,19 @@
+<div class="quiz-box" id="quiz">
+    <div class="quiz-header">
+        <label for="question" id="question_label">Введите вопрос: </label>   
+        <input type="text" id="question" title="{{question}}"/>
+        <ul>
+            @for (item of items; track item) {
+                <li>          
+                    <label for=item>Введите вариант: </label>      
+                    <input type="text" id=item>
+                    <button id=item (click)="delete(item)">Удалить</button>
+                </li>
+                } @empty {
+                <li>Нет вариантов для выбора</li>
+                }
+            <button id="add" (click)="click()">Добавить</button>    
+        </ul>
+    </div>
+    <button id="submit">Сохранить</button>
+</div>

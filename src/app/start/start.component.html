@@ -1,0 +1,23 @@
+<div class="quiz-box" id="quiz">
+    <div class="quiz-header">
+        <h2 id="question">{{question.question}}</h2>
+        <ul>
+            @if(question.type == 'radio' || question.type == 'checkbox'){
+                @for (variant of options; track variant) {
+                    <li>                
+                        <input type={{question.type}} name="answer" id={{variant.id}} class="radio" (change)="variant.isSelected = !variant.isSelected"  [checked]="variant.isSelected">
+                        <label for={{variant.id}} id="a_text">{{variant.text}}</label>
+                    </li>
+                } @empty {
+                    <li>Нет вариантов для выбора</li>
+                }
+            } @else {
+                <li>
+                    <label for="text">Введите ответ:</label>
+                    <textarea id="text" [(ngModel)]="question.textarea"></textarea>
+                </li>
+            }    
+        </ul>
+    </div>
+    <button id="submit" (click)="nextQuestion()">Подтвердить</button>
+</div>
