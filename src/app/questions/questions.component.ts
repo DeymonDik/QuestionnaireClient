@@ -14,118 +14,17 @@ export class QuestionsComponent implements OnInit {
   constructor(private router: Router, private mainService: MainService) {
   };
 
-  public questions: Question[] = [
-    {
-      question: "Сосал?",
-      variants: [
-        {
-          id: 1,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-        {
-          id: 2,
-          questionId: 123,
-          text: 'Конечно',
-          isTrue: false,
-        },
-      ],
-      type: 'radio',
-      group: 'xdd',
-      id: 228,
-      createTime: new Date(),
-    },
-    {
-      question: "Сосал?",
-      variants: [
-        {
-          id: 1,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-        {
-          id: 2,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-      ],
-      type: 'radio',
-      group: 'xdd',
-      createTime: new Date(),
-    },
-    {
-      question: "Сосал?",
-      variants: [
-        {
-          id: 1,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-        {
-          id: 2,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-      ],
-      type: 'radio',
-      group: 'xdd',
-      createTime: new Date(),
-    },
-    {
-      question: "Сосал?",
-      variants: [
-        {
-          id: 1,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-        {
-          id: 2,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-      ],
-      type: 'radio',
-      group: 'xdd',
-      createTime: new Date(),
-    },
-    {
-      question: "Сосал?",
-      variants: [
-        {
-          id: 1,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-        {
-          id: 2,
-          questionId: 123,
-          text: 'Да',
-          isTrue: true,
-        },
-      ],
-      type: 'radio',
-      group: 'xdd',
-      createTime: new Date(),
-    },
-  ];
+  public questions: Question[] = [];
 
   ngOnInit() {
-    this.questions = this.mainService.getQuestions(undefined);
+    this.mainService.getQuestions(undefined).subscribe((questions => {
+      this.questions = questions;
+    }));
   }
 
   public change(question: Question) {
     if (!question.id) return;
 
-    console.log(question);
     this.router.navigate([`create/${question.id}`], {state: {question}});
   }
 

@@ -2,16 +2,19 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Answerer } from '../models/answerer';
 import { HttpClientService } from './http-client.service';
 import { Question } from '../models/question';
+import { map, Observable, tap } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
 
+  public questionCounter = 0;
+
   constructor(private httpClientService: HttpClientService) {
   }
 
-  questions: Question[] = [];
+  public questions: Question[] = [];
 
   answerer: Answerer = {
     id: undefined,
@@ -23,28 +26,31 @@ export class MainService {
   };
 
   ngOnInit() {
-    this.httpClientService.getData().subscribe({
-      next: (data: any | null) => {
-        if (data !== null)
-          this.questions = data;
-      },
-      error: error => {
-        console.log(error);
-      }
-    })
   }
 
   public getAnswerer() {
     return this.answerer;
   }
 
-  public getQuestions(num: number | undefined) {
-    this.ngOnInit();
-    if (num) {
-      return this.questions.filter(o => o.id === num);
-    } else {
-      return this.questions;
-    }
+  public getQuestions(num: number | undefined): Observable<Question[]> {
+    return this.httpClientService.getData().pipe(
+      map(questions => {
+        if (num) {
+          return questions.filter(o => o.id === num);
+        } else {
+          return questions;
+        }
+      }),
+      tap((data: any | null) => {
+          if (data !== null)
+            this.questions = data;
+        }
+      ),
+    )
+  }
+
+  public nextQuestion() {
+    return this.questions[this.questionCounter++];
   }
 
   // private clickCnt:number = 0;

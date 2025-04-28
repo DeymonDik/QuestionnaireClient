@@ -9,50 +9,51 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpClientService {
-  
-  domainServer:string = "http://localhost:8080";
 
-  constructor(private http: HttpClient){ }
-  
-  getData(){
-      const url = `${this.domainServer}/question/list`;
-      return this.http.get(url); 
+  domainServer: string = "http://localhost:8080";
+
+  constructor(private http: HttpClient) {
   }
 
-  postData(question:Question){
+  getData() {
+    const url = `${this.domainServer}/question/list`;
+    return this.http.get<Question[]>(url);
+  }
+
+  postData(question: Question) {
     const url = `${this.domainServer}/question/create`;
-    return this.http.post(url, question); 
+    return this.http.post(url, question);
   }
 
-  putData(question:Question){
-    if(!question.id)return;
+  putData(question: Question) {
+    if (!question.id) return;
     const url = `${this.domainServer}/question/change`;
     const params = new HttpParams().set("id", question.id);
-    return this.http.put(url, question, {params}); 
+    return this.http.put(url, question, {params});
   }
 
-  deleteData(id: number){
+  deleteData(id: number) {
     const url = `${this.domainServer}/question/delete`;
     const params = new HttpParams().set("id", id);
-    return this.http.delete(url, {params}); 
+    return this.http.delete(url, {params});
   }
 
-  postAnswer(answer:Answer){
+  postAnswer(answer: Answer) {
     const url = `${this.domainServer}/answer/create`;
-    return this.http.post(url, answer); 
+    return this.http.post(url, answer);
   }
 
-  getAnswerers(){
+  getAnswerers() {
     const url = `${this.domainServer}/answerer/list`;
     return this.http.get(url);
   }
 
-  postAnswerer(answerer:Answerer){
+  postAnswerer(answerer: Answerer) {
     const url = `${this.domainServer}/answerer/create`;
     return this.http.post(url, answerer);
   }
 
-  getOrder(){
+  getOrder() {
     const url = `${this.domainServer}/order/list`;
     return this.http.get(url);
   }

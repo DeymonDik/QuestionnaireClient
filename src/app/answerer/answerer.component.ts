@@ -3,6 +3,7 @@ import { Answerer } from '../models/answerer';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MainService } from '../services/main.service';
+import { Question } from "../models/question";
 
 @Component({
   selector: 'app-answerer',
@@ -12,20 +13,19 @@ import { MainService } from '../services/main.service';
   styleUrl: './answerer.component.css'
 })
 export class AnswererComponent {
-
-  public form!: FormGroup;
+  public firstQuestion: Question;
 
   constructor(
     private router: Router,
-    private mainService: MainService
+    private mainService: MainService,
   ) {
+    this.firstQuestion = this.mainService.questions[0];
   }
 
   public answerer: Answerer = this.mainService.getAnswerer();
 
   onSubmit() {
-    console.log(this.answerer);
-    this.router.navigate(["start"]);
+    this.mainService.questionCounter = 0;
+    this.router.navigate(["start", this.firstQuestion.id]);
   }
-
 }
