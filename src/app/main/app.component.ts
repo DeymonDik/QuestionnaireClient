@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HttpClientService } from "../services/http-client.service";
 import { MainService } from "../services/main.service";
 
 @Component({
