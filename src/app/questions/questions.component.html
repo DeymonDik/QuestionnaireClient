@@ -3,9 +3,10 @@
     <div class="quiz-questions">
       @for (question of questions; track question) {
         <div class="question">
-          <button (click)="change(question)">
+          <button type="button"  (click)="change(question)">
             {{ question.question }}
           </button>
+          <button type="button" class="delete" (click)="delete(question)">X</button>
         </div>
       }
     </div>

@@ -3,6 +3,7 @@ import { StartComponent } from '../start/start.component';
 import { CreateComponent } from '../create/create.component';
 import { AnswererComponent } from '../answerer/answerer.component';
 import { QuestionsComponent } from '../questions/questions.component';
+import { CongratulationsComponent } from "../congratulations/congratulations.component";
 
 export const routes: Routes = [
     { path: "start", component: StartComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: "create/:id", component: CreateComponent},
     { path: "answerer", component: AnswererComponent },
     { path: "questions", component: QuestionsComponent},
+    { path: "final", component: CongratulationsComponent},
     { path: "**", redirectTo: "" }
 ];

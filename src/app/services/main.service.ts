@@ -3,6 +3,7 @@ import { Answerer } from '../models/answerer';
 import { HttpClientService } from './http-client.service';
 import { Question } from '../models/question';
 import { map, Observable, tap } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,27 @@ export class MainService {
 
   public questionCounter = 0;
 
-  constructor(private httpClientService: HttpClientService) {
+  constructor(
+    private httpClientService: HttpClientService,
+    private router: Router,
+  ) {
   }
 
-  public questions: Question[] = [];
+  public questions: Question[] = [
+    {
+      type: '',
+      question: 'ЗДАРОВА',
+      variants: [{
+        id: undefined,
+        questionId: undefined,
+        text: 'сосал',
+        isTrue: false
+      }],
+      group: '',
+      id: 1337,
+      createTime: new Date(),
+    }
+  ];
 
   answerer: Answerer = {
     id: undefined,
@@ -49,16 +67,7 @@ export class MainService {
     )
   }
 
-  public nextQuestion() {
-    return this.questions[this.questionCounter++];
+  public nextQuestion(): Question {
+    return this.questions[++this.questionCounter];
   }
-
-  // private clickCnt:number = 0;
-  // onClick:EventEmitter<number> = new EventEmitter();
-
-  // public doClick(){
-  //   this.clickCnt++;
-  //   this.onClick.emit(this.clickCnt);
-  // }
-
 }

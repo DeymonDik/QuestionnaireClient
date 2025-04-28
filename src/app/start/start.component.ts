@@ -46,9 +46,6 @@ export class StartComponent implements OnInit {
     )
       .subscribe(data => {
         let id = +data;
-        if (!id) {
-          const question = this.mainService.nextQuestion().id;
-        }
         const que = this.mainService.questions.find(q => q.id === id);
         if (que) {
           this.question = que;
@@ -58,6 +55,11 @@ export class StartComponent implements OnInit {
   }
 
   nextQuestion() {
-    this.router.navigate(["start", this.mainService.nextQuestion().id]);
+    const nextId = this.mainService.nextQuestion()?.id
+    if (nextId) {
+      this.router.navigate(["start", this.mainService.nextQuestion()?.id]);
+    } else {
+      this.router.navigate(['final']);
+    }
   }
 }

@@ -5,6 +5,13 @@
 }
 
 .question {
+  display: flex;
+  gap: 4px;
+
+  .delete {
+    flex: 1;
+  }
+
   button {
     padding: 8px;
     font-weight: normal;
