@@ -8,9 +8,10 @@ import { Question } from '../models/question';
 })
 export class MainService {
 
-  constructor(private httpClientService:HttpClientService){}
+  constructor(private httpClientService: HttpClientService) {
+  }
 
-  questions:Question[] = [];
+  questions: Question[] = [];
 
   answerer: Answerer = {
     id: undefined,
@@ -21,25 +22,26 @@ export class MainService {
     createTime: new Date()
   };
 
-  ngOnInit(){
+  ngOnInit() {
     this.httpClientService.getData().subscribe({
-      next:(data:any|null) => {
-        if(data!==null)
-        this.questions = data;
+      next: (data: any | null) => {
+        if (data !== null)
+          this.questions = data;
       },
-      error: error => {console.log(error);}
+      error: error => {
+        console.log(error);
+      }
     })
   }
 
-  public getAnswerer(){
+  public getAnswerer() {
     return this.answerer;
   }
 
-  public getQuestions(num:number|undefined) {
+  public getQuestions(num: number | undefined) {
     this.ngOnInit();
-    console.log(this.questions);
-    if(num){
-    return this.questions.filter(o=>o.id === num);
+    if (num) {
+      return this.questions.filter(o => o.id === num);
     } else {
       return this.questions;
     }

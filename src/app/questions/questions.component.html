@@ -1,11 +1,13 @@
 <div class="quiz-box" id="quiz">
-    <div class="quiz-header">
-        <ul>
-            @for(question of questionsis; track question){
-                <li>
-                    <button (click)="getStart(question.id)">{{question.question}}</button>
-                </li>
-            }
-        </ul>
+  <div class="quiz-header">
+    <div class="quiz-questions">
+      @for (question of questions; track question) {
+        <div class="question">
+          <button (click)="change(question)">
+            {{ question.question }}
+          </button>
+        </div>
+      }
     </div>
-</div>        
+  </div>
+</div>

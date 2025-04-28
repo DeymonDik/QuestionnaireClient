@@ -1,0 +1,12 @@
+.quiz-questions {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.question {
+  button {
+    padding: 8px;
+    font-weight: normal;
+  }
+}

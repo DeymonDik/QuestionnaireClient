@@ -1,19 +1,36 @@
 <div class="quiz-box" id="quiz">
-    <div class="quiz-header">
-        <label for="question" id="question_label">Введите вопрос: </label>   
-        <input type="text" id="question" title="{{question}}"/>
+  <div class="quiz-header">
+    <form [formGroup]="form">
+      <select class="type-select" formControlName="type">
+        @for (option of options; track option.value) {
+          <option [value]="option.value">{{ option.text }}</option>
+        }
+      </select>
+
+      <label for="question" id="question_label">Введите вопрос: </label>
+      <input type="text" formControlName="question" id="question"/>
+
+      <ng-container formArrayName="variants">
         <ul>
-            @for (item of items; track item) {
-                <li>          
-                    <label for=item>Введите вариант: </label>      
-                    <input type="text" id=item>
-                    <button id=item (click)="delete(item)">Удалить</button>
-                </li>
-                } @empty {
-                <li>Нет вариантов для выбора</li>
-                }
-            <button id="add" (click)="click()">Добавить</button>    
+          @for (variant of variants.controls; track variant; let index = $index) {
+            <li [formGroupName]="index">
+              <label>Введите вариант: </label>
+              <div class="create-item">
+                <input type="text" formControlName="variant">
+                <div class="correct-answer">
+                  <input type="checkbox" formControlName="isTrue">
+                </div>
+                <button id=item (click)="delete(index)">Удалить</button>
+              </div>
+            </li>
+          } @empty {
+            <li>Нет вариантов для выбора</li>
+          }
         </ul>
-    </div>
-    <button id="submit">Сохранить</button>
+      </ng-container>
+
+      <button id="add" (click)="add()">Добавить</button>
+    </form>
+  </div>
+  <button id="submit" (click)="createQuestion()">Сохранить</button>
 </div>

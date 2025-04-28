@@ -1,17 +1,19 @@
 <div class="quiz-box" id="quiz">
-    <div class="quiz-header">
-        <h2>Заполните информацию о себе</h2>
-        <label for="name">Имя:</label>
-        <input type="text" class="quiz-input" id="name" [(ngModel)]="answerer.name" required>
+  <div class="quiz-header">
+    <h2>Заполните информацию о себе</h2>
+    <form [formGroup]="form">
+      <label for="name">Имя:</label>
+      <input type="text" class="quiz-input" id="name" [(ngModel)]="answerer.name" required>
 
-        <label for="group">Группа:</label>
-        <input type="text" class="quiz-input" id="group" [(ngModel)]="answerer.group">
+      <label for="group">Группа:</label>
+      <input type="text" class="quiz-input" id="group" [(ngModel)]="answerer.group">
 
-        <label for="age">Возраст:</label>
-        <input type="number" class="quiz-input" id="age" [(ngModel)]="answerer.age">
+      <label for="age">Возраст:</label>
+      <input type="number" class="quiz-input" id="age" [(ngModel)]="answerer.age">
 
-        <label for="additional">Дополнительно:</label>
-        <textarea id="additional" [(ngModel)]="answerer.additional"></textarea>
-    </div>
-    <button (click)="onSubmit()">Продолжить</button>
+      <label for="additional">Дополнительно:</label>
+      <textarea id="additional" [(ngModel)]="answerer.additional"></textarea>
+    </form>
+  </div>
+  <button type="button" (click)="onSubmit()">Продолжить</button>
 </div>

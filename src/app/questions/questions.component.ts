@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Question } from '../models/question';
 import { Router } from '@angular/router';
 import { MainService } from '../services/main.service';
@@ -10,20 +10,123 @@ import { MainService } from '../services/main.service';
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.css'
 })
-export class QuestionsComponent {
-  constructor(private router: Router, private mainService:MainService){};
+export class QuestionsComponent implements OnInit {
+  constructor(private router: Router, private mainService: MainService) {
+  };
 
-  questionsis:Question[]=[];
+  public questions: Question[] = [
+    {
+      question: "Сосал?",
+      variants: [
+        {
+          id: 1,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+        {
+          id: 2,
+          questionId: 123,
+          text: 'Конечно',
+          isTrue: false,
+        },
+      ],
+      type: 'radio',
+      group: 'xdd',
+      id: 228,
+      createTime: new Date(),
+    },
+    {
+      question: "Сосал?",
+      variants: [
+        {
+          id: 1,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+        {
+          id: 2,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+      ],
+      type: 'radio',
+      group: 'xdd',
+      createTime: new Date(),
+    },
+    {
+      question: "Сосал?",
+      variants: [
+        {
+          id: 1,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+        {
+          id: 2,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+      ],
+      type: 'radio',
+      group: 'xdd',
+      createTime: new Date(),
+    },
+    {
+      question: "Сосал?",
+      variants: [
+        {
+          id: 1,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+        {
+          id: 2,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+      ],
+      type: 'radio',
+      group: 'xdd',
+      createTime: new Date(),
+    },
+    {
+      question: "Сосал?",
+      variants: [
+        {
+          id: 1,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+        {
+          id: 2,
+          questionId: 123,
+          text: 'Да',
+          isTrue: true,
+        },
+      ],
+      type: 'radio',
+      group: 'xdd',
+      createTime: new Date(),
+    },
+  ];
 
-  ngOnInit(){
-    console.log("ВОтвот")
-    this.questionsis = this.mainService.getQuestions(undefined);
-    console.log("sfdsfsdga");
-    console.log(this.questionsis);
+  ngOnInit() {
+    this.questions = this.mainService.getQuestions(undefined);
   }
 
-  getStart(nuber:number|undefined){
-    this.router.navigate([`start/${nuber}`]);
+  public change(question: Question) {
+    if (!question.id) return;
+
+    console.log(question);
+    this.router.navigate([`create/${question.id}`], {state: {question}});
   }
 
 }
