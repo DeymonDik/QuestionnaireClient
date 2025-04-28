@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Question } from '../models/question';
-import { HttpClientService } from '../services/http-client.service';
+import { Router } from '@angular/router';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-questions',
@@ -10,23 +11,19 @@ import { HttpClientService } from '../services/http-client.service';
   styleUrl: './questions.component.css'
 })
 export class QuestionsComponent {
-  constructor(private httpClientService:HttpClientService){};
+  constructor(private router: Router, private mainService:MainService){};
 
   questionsis:Question[]=[];
 
   ngOnInit(){
-    this.httpClientService.getData().subscribe({
-      next:(data:any|null) => {
-        if(data!==null)
-        this.questionsis.unshift(data);
-        console.log(this.questionsis);
-      },
-      error: error => {console.log(error);}
-    })
+    console.log("ВОтвот")
+    this.questionsis = this.mainService.getQuestions(undefined);
+    console.log("sfdsfsdga");
+    console.log(this.questionsis);
   }
 
-  getDa(){
-    this.questionsis.forEach(o=>{console.log(o.id)});
+  getStart(nuber:number|undefined){
+    this.router.navigate([`start/${nuber}`]);
   }
 
 }

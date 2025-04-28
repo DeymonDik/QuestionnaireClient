@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Question } from '../models/question';
 import { Variant } from '../models/variant';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-start',
@@ -27,6 +30,18 @@ export class StartComponent {
     variants:this.options,
     textarea:''
   }
+
+  constructor(private route: ActivatedRoute, private mainService:MainService){}
+  ngOnInit() {
+      this.route.paramMap.pipe(
+          switchMap(params => params.getAll("id"))
+      )
+      .subscribe(data=> {
+        const que = this.mainService.getQuestions(+data).at(0);
+        if(que)
+        this.question = que;
+      });
+    }
 
   nextQuestion(){
     console.log(this.question);

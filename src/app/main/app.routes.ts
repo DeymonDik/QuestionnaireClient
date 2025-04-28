@@ -6,6 +6,7 @@ import { QuestionsComponent } from '../questions/questions.component';
 
 export const routes: Routes = [
     { path: "start", component: StartComponent },
+    { path: "start/:id", component: StartComponent},
     { path: "create", component: CreateComponent },
     { path: "answerer", component: AnswererComponent },
     { path: "questions", component: QuestionsComponent},
