@@ -4,12 +4,14 @@ import { Question } from "../models/question";
 import { Variant } from "../models/variant";
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-create',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
@@ -39,6 +41,8 @@ export class CreateComponent implements OnInit {
       value: 'textarea',
     },
   ]
+
+  public sendingQuestion: boolean = false;
 
   constructor(
     private httpClientService: HttpClientService,
@@ -91,7 +95,6 @@ export class CreateComponent implements OnInit {
   }
 
   public createQuestion() {
-    console.log(this.form.value);
     const question: Question = {
       question: this.form.controls['question'].value,
       createTime: new Date(),
@@ -106,6 +109,22 @@ export class CreateComponent implements OnInit {
       type: this.form.controls['type'].value,
       group: '',
     }
+
+    this.form.reset();
+
+    this.variants = new FormArray([
+      new FormGroup({
+        variant: new FormControl(''),
+        isTrue: new FormControl(false),
+      })
+    ]);
+
+    this.sendingQuestion = true;
+
+    setTimeout(() => {
+      this.sendingQuestion = false;
+    }, 3000)
+
     this.httpClientService.postData(question).subscribe();
   }
 }

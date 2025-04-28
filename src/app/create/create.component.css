@@ -43,6 +43,12 @@ ul {
   float: right;
 }
 
+.sending {
+  margin-top: 10px;
+  border-color: #5ec6eb;
+  color: #5ec6eb;
+}
+
 #question {
   padding: 8px;
   width: 100%;
