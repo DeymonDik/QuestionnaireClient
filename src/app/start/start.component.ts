@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MainService } from '../services/main.service';
 import { HttpClientService } from "../services/http-client.service";
+import { Answer } from '../models/answer';
 
 @Component({
   selector: 'app-start',
@@ -55,6 +56,25 @@ export class StartComponent implements OnInit {
   }
 
   nextQuestion() {
+    const answerId = this.mainService.answerer.id;
+    if(!answerId || !this.question.id)return;
+
+    let answerString = undefined;
+    let answers = undefined;
+    if(this.question.type !== 'radio' && this.question.type !== 'checkbox'){
+      answerString = this.question.textarea;
+    } else {
+      answers = this.question.variants.filter(o=>o.isSelected);
+    }
+    const answer: Answer = {
+      id: undefined,
+      questionId:  this.question.id,
+      answererId: answerId,
+      answers: answers,
+      answer: answerString,
+      createTime: new Date()
+    }
+    this.httpService.postAnswer(answer).subscribe();
     const nextId = this.mainService.nextQuestion()?.id
     if (nextId) {
       this.router.navigate(["start", this.mainService.nextQuestion()?.id]);
