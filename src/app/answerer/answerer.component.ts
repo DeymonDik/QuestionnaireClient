@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { MainService } from '../services/main.service';
 import { Question } from "../models/question";
 import { HttpClientService } from '../services/http-client.service';
-import { subscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-answerer',

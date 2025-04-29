@@ -21,11 +21,11 @@ export class MainService {
   public questions: Question[] = [
     {
       type: '',
-      question: 'ЗДАРОВА',
+      question: '',
       variants: [{
         id: undefined,
         questionId: undefined,
-        text: 'сосал',
+        text: '',
         isTrue: false
       }],
       group: '',

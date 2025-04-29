@@ -76,8 +76,10 @@ export class StartComponent implements OnInit {
     }
     this.httpService.postAnswer(answer).subscribe();
     const nextId = this.mainService.nextQuestion()?.id
+    console.log(nextId);
+    
     if (nextId) {
-      this.router.navigate(["start", this.mainService.nextQuestion()?.id]);
+      this.router.navigate(["start", nextId]);
     } else {
       this.router.navigate(['final']);
     }
